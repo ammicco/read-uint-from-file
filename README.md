@@ -1,0 +1,1 @@
+A simple way to read n bit from a text file and store it in a uint variable. 
