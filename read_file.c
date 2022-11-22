@@ -4,7 +4,7 @@
 
 void *readbit(FILE *f, size_t bit){
     int i, len;
-    void *tmp = malloc(bit); 
+    void *tmp = malloc(bit / 8); 
     uint64_t r = 0;
 
     *((uint64_t *) tmp) = 0;

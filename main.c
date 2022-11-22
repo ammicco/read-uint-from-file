@@ -11,7 +11,7 @@ static void Usage(){
 
 int main(int argc, char **argv){
     FILE *f; 
-    uint32_t *b;
+    uint64_t *b;
 
     if(argc < 3){
         Usage();
@@ -25,11 +25,11 @@ int main(int argc, char **argv){
         return -1;
     }
 
-    b = (uint32_t *) readbit(f, atoi(argv[2]));
+    b = (uint64_t *) readbit(f, atoi(argv[2]));
 
     fclose(f);
 
-    printf("Read %d bit -> 0x%x\n", atoi(argv[2]), *(b));
+    printf("Read %d bit -> %lu\n", atoi(argv[2]), *(b));
 
     return 0;
 }
