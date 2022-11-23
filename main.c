@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,6 +13,7 @@ static void Usage(){
 int main(int argc, char **argv){
     FILE *f; 
     uint64_t *b;
+    size_t bit_num = atoi(argv[2]);
 
     if(argc < 3){
         Usage();
@@ -20,16 +22,21 @@ int main(int argc, char **argv){
     
     f = fopen(argv[1], "rb");
 
-    if(atoi(argv[2]) != 64 && atoi(argv[2]) != 32 && atoi(argv[2]) != 16 && atoi(argv[2]) != 8){
-        fputs("argv[2] not allowed.\eexit\n", stderr);
+    if(!f){
+        fputs("Open file error", stderr);
         return -1;
     }
 
-    b = (uint64_t *) readbit(f, atoi(argv[2]));
+    if(bit_num != 64 && bit_num != 32 && bit_num != 16 && bit_num != 8){
+        fputs("argv[2] not allowed.\nexit\n", stderr);
+        return -1;
+    }
+
+    b = (uint64_t *) readbit(f, bit_num);
 
     fclose(f);
 
-    printf("Read %d bit -> %lu\n", atoi(argv[2]), *(b));
+    printf("Read %zu bit -> %lu\n", bit_num, *(b));
 
     return 0;
 }
